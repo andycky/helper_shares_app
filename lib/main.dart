@@ -40,7 +40,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('Helper Shares'),
+        title: const Text('傭•我分享'),
         leading: IconButton(
           onPressed: () {},
           icon: const CircleAvatar(backgroundImage: AssetImage('assets/img/avatar.png')),

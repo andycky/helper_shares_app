@@ -24,7 +24,7 @@ class NewScreen extends StatelessWidget {
     futureHelpers = fetchApi();
 
     return Scaffold(
-      appBar: AppBar(title: const Center(child:Text('Match Helpers    '))),
+      appBar: AppBar(title: Center(child:Text('${this.employer.name} 在搜尋      '))),
       body: Center(
         child: FutureBuilder<List<Helper>>(
             future: futureHelpers,
@@ -105,22 +105,32 @@ class HelperItem extends StatelessWidget {
         Expanded(child: CircleAvatar(
           radius: 14,
           backgroundColor: Colors.grey,
-          child:Text(helper.mark.length.toString(),style: TextStyle(fontSize: 12,color: Colors.white)),
+          child:Text(helper.mark.length.toString(),style: const TextStyle(fontSize: 12,color: Colors.white)),
         )),
         Expanded(flex:4,child: Container(
             //alignment: Alignment.center,
-            child:Text(helper.nname.substring(0,min(helper.nname.length,12))
+            child:Text(helper.nname.substring(0,min(helper.nname.length,10))
         ))),
-        Expanded(child: CircleAvatar(
+        Expanded(child: (helper.L=="Oversea")?
+          const CircleAvatar(
+          radius: 14,
+          backgroundColor: Colors.blue,
+          child:Text("O",style: TextStyle(fontSize: 12,color: Colors.white)),
+        ):const CircleAvatar(
+          radius: 14,
+          backgroundColor: Colors.green,
+          child:Text("L",style: TextStyle(fontSize: 12,color: Colors.white)),
+        )),
+        Expanded(child: (helper.count!="")?CircleAvatar(
           radius: 14,
           backgroundColor: Colors.grey,
-          child:Text(helper.count.toString(),style: TextStyle(fontSize: 12,color: Colors.white)),
-        )),
-        Expanded(child: CircleAvatar(
+          child:Text(helper.count.toString(),style: const TextStyle(fontSize: 12,color: Colors.white)),
+        ):const Text("")),
+        Expanded(child: (helper.count_interview!="")?CircleAvatar(
           radius: 14,
           backgroundColor: Colors.grey,
-          child:Text(helper.count_interview.toString(),style: TextStyle(fontSize: 12,color: Colors.white)),
-        )),
+          child:Text(helper.count_interview.toString(),style: const TextStyle(fontSize: 12,color: Colors.white)),
+        ):const Text("")),
         // Expanded(flex:1,child: GestureDetector(
         //     onTap: _launchURL,
         //     child:Image.asset('assets/img/whatsapp.png',width:35,height:35,
@@ -128,7 +138,7 @@ class HelperItem extends StatelessWidget {
       ],
     ),
       //subtitle: Text(helper.service+" | "+helper.N+" | "+helper.L+" | "+helper.S.toString()+" | "+helper.age.toString()+" | "+helper.D+" | "+helper.R+" | "+helper.H+" | "+helper.G),
-      subtitle: Image.network(helper.image),
+      subtitle: (helper.image!="")?Image.network(helper.image):Image.asset("assets/img/logo.jpeg"),
     ),
     );
 
